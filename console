@@ -1,0 +1,45 @@
+<?php
+spl_autoload_extensions(".php");
+spl_autoload_register();
+
+// composerの依存関係のオートロード
+require_once 'vendor/autoload.php';
+
+// debug_memo
+// "Commands/registry.php"をインクルードしてる
+// $commands = ["Migrate", "CodeGeneration"];
+
+$commands = include "Commands/registry.php";
+
+// 第2引数は実行するコマンド
+$inputCommand = $argv[1];
+
+// PHPでそれらをインスタンス化できるすべてのコマンドクラス名を通過します。
+foreach ($commands as $commandClass) {
+    print("debug!!! : ".$commandClass."\n");
+    $alias = $commandClass::getAlias();
+
+    if($inputCommand === $alias){
+        // debug_memo
+        // in_array()関数
+        // 特定の値が配列に存在するかどうかをチェックするために使用されます
+        // 存在した場合:true
+        // 存在しない場合:false
+        if(in_array('--help',$argv)){
+            // debug_memo
+            // 現状は、"Migrate", "CodeGeneration"のどちらもgetHelp()は実装されてないが、
+            // どちらもAbstractCommandクラスのgetHelp()で$helpStringを返す
+            fwrite(STDOUT, $commandClass::getHelp());
+            exit(0);
+        }
+        else{
+            // debug_memo
+            // "Migrate"か"CodeGeneration"どちらかのインスタンスを作成する
+            $command = new $commandClass();
+            $result = $command->execute();
+            exit($result);
+        }
+    }
+}
+
+fwrite(STDOUT,"Failed to run any commands\n");
