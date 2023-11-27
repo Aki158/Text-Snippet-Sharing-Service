@@ -1,3 +1,9 @@
+<?php
+
+namespace Snippets;
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,8 +17,8 @@
         <div class="container d-flex justify-content-between">
             <h3 class="py-3">Text Snippet Sharing Service</h3>
             <div>
-                <a href="newSnippet.html" class="btn btn-primary m-3">New Snippet</a>
-                <a href="publicSnippets.html" class="btn btn-primary m-3">Public Snippets</a>
+                <a href="newSnippet.php" class="btn btn-primary m-3">New Snippet</a>
+                <a href="publicSnippets.php" class="btn btn-primary m-3">Public Snippets</a>
             </div>
         </div>
     </div>

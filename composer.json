@@ -6,9 +6,9 @@
             "Design\\": "Design/",
             "Exceptions\\": "Exceptions/",
             "Helpers\\": "Helpers/",
+            "Outputs\\": "Outputs/",
             "public\\": "public/",
-            "Response\\": "Response/",
-            "Routing\\": "Routing/",
+            "Temp\\": "Temp/",
             "Views\\": "Views/"
         }
     }
