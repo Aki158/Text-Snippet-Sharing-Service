@@ -27,10 +27,15 @@ class PasteSeeder extends AbstractSeeder {
         ]
     ];
 
-    public function createRowData(): array
+    public function createRowData(string $name, string $syntax, string $expiration, string $url): array
     {
         return [
-            // newSnippet.htmlの入力情報をもとに設定する
+            [
+                $name,
+                $syntax,
+                $expiration,
+                $url
+            ]
         ];
     }
 }
