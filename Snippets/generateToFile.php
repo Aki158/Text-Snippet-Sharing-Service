@@ -1,5 +1,4 @@
 <?php
-namespace Snippets;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $json_data = file_get_contents("php://input");
@@ -19,4 +18,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         print($file_path);
     }
 }
+
 ?>

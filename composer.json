@@ -6,8 +6,8 @@
             "Design\\": "Design/",
             "Exceptions\\": "Exceptions/",
             "Helpers\\": "Helpers/",
-            "Outputs\\": "Outputs/",
             "public\\": "public/",
+            "Snippets\\": "Snippets/",
             "Temp\\": "Temp/",
             "Views\\": "Views/"
         }

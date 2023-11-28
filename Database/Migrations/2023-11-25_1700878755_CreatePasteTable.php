@@ -14,7 +14,8 @@ class CreatePasteTable implements SchemaMigration
                 name VARCHAR(255) NOT NULL,
                 syntax VARCHAR(255) NOT NULL,
                 expiration VARCHAR(255) NOT NULL,
-                url VARCHAR(255) NOT NULL,
+                path VARCHAR(255) NOT NULL,
+                code TEXT NOT NULL,
                 created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             )"
         ];

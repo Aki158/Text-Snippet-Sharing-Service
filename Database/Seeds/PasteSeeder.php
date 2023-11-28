@@ -23,18 +23,23 @@ class PasteSeeder extends AbstractSeeder {
         ],
         [
             'data_type' => 'string',
-            'column_name' => 'url'
-        ]
+            'column_name' => 'path'
+        ],
+        [
+            'data_type' => 'string',
+            'column_name' => 'code'
+        ]   
     ];
 
-    public function createRowData(string $name, string $syntax, string $expiration, string $url): array
+    public function createRowData(string $name, string $syntax, string $expiration, string $path, string $code): array
     {
         return [
             [
                 $name,
                 $syntax,
                 $expiration,
-                $url
+                $path,
+                $code
             ]
         ];
     }

@@ -68,13 +68,13 @@ document.getElementById('inputName').addEventListener('keydown', function() {
     var inputName = this.value;
     var errorMessage = document.getElementById('errorMessage');
     var submitButton = document.getElementById('submitButton');
-    var invalidChars = /[.<>:"\/\\|?*]/;
+    var invalidChars = /[<>:".\/\\|?*]/;
 
     if (invalidChars.test(inputName)) {
-        errorMessage.style.display = 'block';
+        errorMessage.classList.add("text-danger");
         submitButton.disabled = true;
     } else {
-        errorMessage.style.display = 'none';
+        errorMessage.classList.remove("text-danger");
         submitButton.disabled = false;
     }
 });

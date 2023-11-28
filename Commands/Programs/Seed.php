@@ -18,7 +18,8 @@ class Seed extends AbstractCommand
             (new Argument('name'))->description('Set name.')->required(false)->allowAsShort(true),
             (new Argument('syntax'))->description('Set syntax.')->required(false)->allowAsShort(true),
             (new Argument('expiration'))->description('Set expiration.')->required(false)->allowAsShort(true),
-            (new Argument('url'))->description('Set url.')->required(false)->allowAsShort(true),
+            (new Argument('path'))->description('Set path.')->required(false)->allowAsShort(true),
+            (new Argument('code'))->description('Set code.')->required(false)->allowAsShort(true)
         ];
     }
 
@@ -27,12 +28,13 @@ class Seed extends AbstractCommand
         $name = $this->getArgumentValue('name');
         $syntax = $this->getArgumentValue('syntax');
         $expiration = $this->getArgumentValue('expiration');
-        $url = $this->getArgumentValue('url');
-        $this->runAllSeeds($name, $syntax, $expiration, $url);
+        $path = $this->getArgumentValue('path');
+        $code = $this->getArgumentValue('code');
+        $this->runAllSeeds($name, $syntax, $expiration, $path, $code);
         return 0;
     }
 
-    function runAllSeeds(string $name, string $syntax, string $expiration, string $url): void {
+    function runAllSeeds(string $name, string $syntax, string $expiration, string $path, string $code): void {
         $directoryPath = __DIR__ . '/../../Database/Seeds';
 
         // ディレクトリをスキャンしてすべてのファイルを取得します。
@@ -48,7 +50,7 @@ class Seed extends AbstractCommand
 
                 if (class_exists($className) && is_subclass_of($className, Seeder::class)) {
                     $seeder = new $className(new MySQLWrapper());
-                    $seeder->seed($name, $syntax, $expiration, $url);
+                    $seeder->seed($name, $syntax, $expiration, $path, $code);
                 }
                 else throw new \Exception('Seeder must be a class that subclasses the seeder interface');
             }
