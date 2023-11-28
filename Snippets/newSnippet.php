@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../public/css/style.css">
 
     <title>Text Snippet Sharing Service</title>
-    <div class="bg-info">
+    <div class="fixed-header bg-info">
         <div class="container d-flex justify-content-between">
             <h3 class="py-3">Text Snippet Sharing Service</h3>
             <div>
