@@ -1,9 +1,8 @@
 require.config({ paths: { "vs": "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs" }});
 require(["vs/editor/editor.main"], function() {
-    window.editor = monaco.editor.create(document.getElementById("editor"), {
+    const editor = monaco.editor.create(document.getElementById("editor"), {
         value: "",
-        // language: "plaintext"
-        language: "python"
+        language: "plaintext"
     });
 
     function debounce(func, wait) {
@@ -65,10 +64,10 @@ window.addEventListener("load", (event) => {
 });
 
 document.getElementById('inputName').addEventListener('keydown', function() {
-    var inputName = this.value;
-    var errorMessage = document.getElementById('errorMessage');
-    var submitButton = document.getElementById('submitButton');
-    var invalidChars = /[<>:".\/\\|?*]/;
+    const inputName = this.value;
+    const errorMessage = document.getElementById('errorMessage');
+    const submitButton = document.getElementById('submitButton');
+    const invalidChars = /[<>:".\/\\|?*]/;
 
     if (invalidChars.test(inputName)) {
         errorMessage.classList.add("text-danger");

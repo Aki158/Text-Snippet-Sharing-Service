@@ -9,7 +9,6 @@ use Database\Seeder;
 
 class Seed extends AbstractCommand
 {
-    // コマンド名を設定します
     protected static ?string $alias = 'seed';
 
     public static function getArguments(): array
@@ -37,15 +36,15 @@ class Seed extends AbstractCommand
     function runAllSeeds(string $name, string $syntax, string $expiration, string $path, string $code): void {
         $directoryPath = __DIR__ . '/../../Database/Seeds';
 
-        // ディレクトリをスキャンしてすべてのファイルを取得します。
+        // ディレクトリをスキャンしてすべてのファイルを取得する
         $files = scandir($directoryPath);
 
         foreach ($files as $file) {
             if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
-                // ファイル名からクラス名を抽出します。
+                // ファイル名からクラス名を抽出する
                 $className = 'Database\Seeds\\' . pathinfo($file, PATHINFO_FILENAME);
 
-                // シードファイルをインクルードします。
+                // シードファイルをインクルードする
                 include_once $directoryPath . '/' . $file;
 
                 if (class_exists($className) && is_subclass_of($className, Seeder::class)) {

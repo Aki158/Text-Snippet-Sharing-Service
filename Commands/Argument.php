@@ -2,13 +2,6 @@
 
 namespace Commands;
 
-// debug_memo
-// Argumentクラスは、Migrate.phpで使用されている
-// (new Argument('rollback'))->
-// description('Roll backwards. An integer n may also be provided to rollback n times.')->
-// required(false)->
-// allowAsShort(true)
-
 class Argument
 {
     private string $argument;

@@ -6,7 +6,7 @@ require(["vs/editor/editor.main"], function() {
         readOnly: true
     });
 
-    // copyボタンをクリックするとmonaco-editorのスニペットを全選択してコピーします
+    // copyボタンをクリックするとmonaco-editorのスニペットを全選択してコピーする
     document.getElementById("copy_button").addEventListener('click', function() {
         editor.updateOptions({ readOnly: false });
         const range = editor.getModel().getFullModelRange();
