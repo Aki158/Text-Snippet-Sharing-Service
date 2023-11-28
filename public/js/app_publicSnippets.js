@@ -1,35 +1,35 @@
 window.addEventListener("load", (event) => {
-    for (var i = 0; i < Object.keys(snippets_table).length; i++) {
-        render_table_cell(i,snippets_table,document.getElementById("table_body"));
+    for (var i = 0; i < Object.keys(snippetsTable).length; i++) {
+        renderTableCell(i,snippetsTable,document.getElementById("tableBody"));
     }
 });
 
-function render_table_cell(index,snippets_table,table_body){
+function renderTableCell(index,snippetsTable,tableBody){
     const row = document.createElement("tr");
-    const cell_th_name = document.createElement("th");
-    const cell_td_posted = document.createElement("td");
-    const cell_td_syntax = document.createElement("td");
+    const cellThName = document.createElement("th");
+    const cellTdPosted = document.createElement("td");
+    const cellTdSyntax = document.createElement("td");
 
     row.setAttribute("id", "table_content"+(index+1));
 
-    cell_th_name.setAttribute("id", "name"+(index+1));
-    cell_td_posted.setAttribute("id", "posted"+(index+1));
-    cell_td_syntax.setAttribute("id", "syntax"+(index+1));
+    cellThName.setAttribute("id", "name"+(index+1));
+    cellTdPosted.setAttribute("id", "posted"+(index+1));
+    cellTdSyntax.setAttribute("id", "syntax"+(index+1));
 
-    cell_th_name.innerHTML = snippets_table[index].name;
-    cell_td_posted.innerHTML = snippets_table[index].posted;
-    cell_td_syntax.innerHTML = snippets_table[index].syntax;
+    cellThName.innerHTML = snippetsTable[index].name;
+    cellTdPosted.innerHTML = snippetsTable[index].posted;
+    cellTdSyntax.innerHTML = snippetsTable[index].syntax;
 
     row.classList.add("cursor-pointer");
     
     row.addEventListener("click", function() {
-        if(snippets_table[index].path !== "None"){
-            window.location.href = "snippet.php"+"?path="+snippets_table[index].path;
+        if(snippetsTable[index].path !== "None"){
+            window.location.href = "snippet.php"+"?path="+snippetsTable[index].path;
         }
     });
 
-    row.append(cell_th_name);
-    row.append(cell_td_posted);
-    row.append(cell_td_syntax);
-    table_body.append(row);
+    row.append(cellThName);
+    row.append(cellTdPosted);
+    row.append(cellTdSyntax);
+    tableBody.append(row);
 }

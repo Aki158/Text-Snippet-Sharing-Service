@@ -3,132 +3,56 @@
 namespace Helpers;
 
 use Database\MySQLWrapper;
-use Exception;
 use DateTime;
 
 class DatabaseHelper
 {
-    // public static function getRandomComputerPart(): array{
-    //     $db = new MySQLWrapper();
-
-    //     $stmt = $db->prepare("SELECT * FROM computer_parts ORDER BY RAND() LIMIT 1");
-    //     $stmt->execute();
-    //     $result = $stmt->get_result();
-    //     $part = $result->fetch_assoc();
-
-    //     if (!$part) throw new Exception('Could not find a single part in database');
-
-    //     return $part;
-    // }
-
-    // public static function getComputerPartById(int $id): array{
-    //     $db = new MySQLWrapper();
-
-    //     $stmt = $db->prepare("SELECT * FROM computer_parts WHERE id = ?");
-    //     $stmt->bind_param('i', $id);
-    //     $stmt->execute();
-
-    //     $result = $stmt->get_result();
-    //     $part = $result->fetch_assoc();
-
-    //     if (!$part) throw new Exception('Could not find a single part in database');
-
-    //     return $part;
-    // }
-    // // debug_start
-    // public static function getComputerPartByTypes(string $type, int $page, int $perpage): array{
-    //     $db = new MySQLWrapper();
-
-    //     $stmt = $db->prepare("SELECT * FROM computer_parts WHERE type = ?");
-    //     $stmt->bind_param('s', $type);
-    //     $stmt->execute();
-
-    //     $result = $stmt->get_result();
-    //     $parts = [];
-
-    //     for($i = 0;$i < $page;$i++){
-    //         for($j = 0;$j < $perpage;$j++){
-    //             $parts[$i][$j] = $result->fetch_assoc();
-    //         }
-    //     }
-
-    //     if (!$parts) throw new Exception('Could not find a single part in database');
-
-    //     return $parts;
-    // }
-    // public static function getRandomComputer(): array{
-    //     $db = new MySQLWrapper();
-    //     $types = ["RAM","SSD","CPU","GPU"];
-    //     $parts = [];
-
-    //     for($i = 0;$i < count($types);$i++){
-    //         $stmt = $db->prepare("SELECT * FROM computer_parts WHERE type = ? ORDER BY RAND() LIMIT 1");
-    //         $stmt->bind_param('s', $types[$i]);
-    //         $stmt->execute();
-    //         $result = $stmt->get_result();
-    //         $parts[$i] = $result->fetch_assoc();
-    //     }
-
-    //     if (!$parts) throw new Exception('Could not find a single part in database');
-
-    //     return $parts;
-    // }
-    // public static function getComputerPartByNewest(int $page, int $perpage): array{
-    //     $db = new MySQLWrapper();
-
-    //     $stmt = $db->prepare("SELECT * FROM computer_parts ORDER BY updated_at DESC");
-    //     $stmt->execute();
-
-    //     $result = $stmt->get_result();
-    //     $parts = [];
-
-    //     for($i = 0;$i < $page;$i++){
-    //         for($j = 0;$j < $perpage;$j++){
-    //             $parts[$i][$j] = $result->fetch_assoc();
-    //         }
-    //     }
-
-    //     if (!$parts) throw new Exception('Could not find a single part in database');
-
-    //     return $parts;
-    // }
-    // public static function getComputerPartByPerformance(string $order, string $type): array{
-    //     $db = new MySQLWrapper();
-
-    //     $stmt = $db->prepare("SELECT * FROM computer_parts WHERE type = ? ORDER BY performance_score $order");
-    //     $stmt->bind_param('s', $type);
-    //     $stmt->execute();
-
-    //     $result = $stmt->get_result();
-    //     $parts = [];
-    //     $num = 50;
-
-    //     for($i = 0;$i < $num;$i++){
-    //             $parts[$i] = $result->fetch_assoc();
-    //     }
-
-    //     if (!$parts) throw new Exception('Could not find a single part in database');
-
-    //     return $parts;
-    // }
-
-    public static function getSnippets(): array{
+    public static function checkSnippetsExpiration(): void{
         $db = new MySQLWrapper();
 
         $stmt = $db->prepare("SELECT * FROM snippet");
         $stmt->execute();
 
         $result = $stmt->get_result();
-        $snippets = [];
-        $i = 0;
 
-        while ($snippets[$i] = $result->fetch_assoc()) {
-            $i++;
+        while ($snippet = $result->fetch_assoc()) {
+            if(self::isExpired($snippet["expiration"], $snippet["created_at"])){
+                self::deleteSnippet($snippet["path"]);
+            }
+        }
+    }
+
+    public static function isExpired(string $expiration, string $pre): bool{
+        $now = date("Y-m-d H:i:s");
+        $expirationValue = PHP_INT_MAX;
+
+        if($expiration === "10min"){
+            $expirationValue = 10;
+        }
+        else if($expiration === "1h"){
+            $expirationValue = 60;
+        }
+        else if($expiration === "1day"){
+            $expirationValue = 1440;
         }
 
-        if (!$snippets) throw new Exception('Could not find a single snippet in database');
+        $preTime = new DateTime($pre);
+        $currentTime = new DateTime($now);
+        $interval = $preTime->diff($currentTime);
 
-        return $snippets;
+        $minutes = $interval->days * 24 * 60;
+        $minutes += $interval->h * 60;
+        $minutes += $interval->i;
+
+        return $expirationValue - $minutes < 0;
+    }
+
+    private static function deleteSnippet(string $path): void{
+        $db = new MySQLWrapper();
+
+        $stmt = $db->prepare("DELETE FROM snippet Where path = ?");
+        $stmt->bind_param('s', $path);
+        $stmt->execute();
     }
 
     public static function getSnippetsTableInfo(): array{
@@ -138,32 +62,32 @@ class DatabaseHelper
         $stmt->execute();
 
         $result = $stmt->get_result();
-        $snippets_table = [];
+        $snippetsTable = [];
         $i = 0;
-        $now = date("Y-m-d H:i:s");
 
         while ($row = $result->fetch_assoc()) {
-            $snippets_table[$i] = [
+            $snippetsTable[$i] = [
                 "name" => $row["name"],
-                "posted" => self::getPostTime($now, $row["created_at"]),
+                "posted" => self::getPostTime($row["created_at"]),
                 "syntax" => $row["syntax"],
                 "path" => $row["path"]
             ];
             $i++;
         }
 
-        if (!$snippets_table){
-            $snippets_table[0] = [
+        if (!$snippetsTable){
+            $snippetsTable[0] = [
                 "name" => "There are no snippets...<br>Let's create a new snippet!!!",
                 "posted" => "None",
                 "syntax" => "None",
                 "path" => "None"
             ];
         }
-        return $snippets_table;
+        return $snippetsTable;
     }
 
-    private  static function getPostTime(string $now, string $pre): string{
+    private static function getPostTime(string $pre): string{
+        $now = date("Y-m-d H:i:s");
         $preTime = new DateTime($pre);
         $currentTime = new DateTime($now);
         $interval = $preTime->diff($currentTime);

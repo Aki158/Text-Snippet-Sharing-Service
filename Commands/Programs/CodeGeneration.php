@@ -7,12 +7,9 @@ use Commands\Argument;
 
 class CodeGeneration extends AbstractCommand
 {
-    // 使用するコマンド名を設定します
-    // ★コマンド例 php console code-gen migration --name CreateUserTable1
     protected static ?string $alias = 'code-gen';
     protected static bool $requiredCommandValue = true;
 
-    // 引数を割り当てます
     public static function getArguments(): array
     {
         return [
@@ -30,17 +27,14 @@ class CodeGeneration extends AbstractCommand
             $this->generateMigrationFile($migrationName);
         }
 
-        // debug_start
         if ($codeGenType === 'seeder') {
             $seederName = $this->getArgumentValue('name');
             $this->generateSeederFile($seederName);
         }
-        // debug_end
 
         return 0;
     }
 
-// debug_start
     private function generateSeederFile(string $seederName): void
     {
         $filename = sprintf(
@@ -50,7 +44,7 @@ class CodeGeneration extends AbstractCommand
 
         $seederContent = $this->getSeederContent($seederName);
 
-        // 移行ファイルを保存するパスを指定します
+        // 移行ファイルを保存するパスを指定する
         $path = sprintf("%s/../../Database/Seeds/%s", __DIR__,$filename);
 
         file_put_contents($path, $seederContent);
@@ -89,8 +83,6 @@ class {$className} extends AbstractSeeder {
 }
 Seed;
     }
-// debug_end
-
 
     private function generateMigrationFile(string $migrationName): void
     {
@@ -103,7 +95,7 @@ Seed;
 
         $migrationContent = $this->getMigrationContent($migrationName);
 
-        // 移行ファイルを保存するパスを指定します
+        // 移行ファイルを保存するパスを指定する
         $path = sprintf("%s/../../Database/Migrations/%s", __DIR__,$filename);
 
         file_put_contents($path, $migrationContent);

@@ -8,12 +8,8 @@ use Database\MySQLWrapper;
 
 class Migrate extends AbstractCommand
 {
-    // ★ php console migrate
-    // ★ php console migrate --init
-    // コマンド名を設定します
     protected static ?string $alias = 'migrate';
 
-    // 引数を割り当てます
     public static function getArguments(): array
     {
         return [
@@ -32,7 +28,6 @@ class Migrate extends AbstractCommand
             $this->log("Starting migration......");
             $this->migrate();
         } else {
-            // rollbackはtrueに設定されているか、それに関連付けられた値が整数として存在するかのいずれかです。
             $rollbackN = $rollback === true ? 1 : (int)$rollback;
             $this->log("Running rollback....");
             $this->rollback($rollbackN);
@@ -64,31 +59,14 @@ class Migrate extends AbstractCommand
         $this->log("Running migrations...");
 
         $lastMigration = $this->getLastMigration();
-        // ファイル名を日付順（ASC）に並べた配列を返します
+        // ファイル名を日付順（ASC）に並べた配列を返す
         $allMigrations = $this->getAllMigrationFiles();
         $startIndex = ($lastMigration) ? array_search($lastMigration, $allMigrations) + 1 : 0;
         
-        // debug_start
-        // print("lastMigration : ".$lastMigration."\n");
-        // print("startIndex : ".$startIndex."\n");
-        // print("count(allMigrations) : ".count($allMigrations)."\n");
-        // debug_end
-
         for ($i = $startIndex; $i < count($allMigrations); $i++) {
             $filename = $allMigrations[$i];
 
-            // debug_start
-            // print("filename : ".$filename."\n");
-
-            // if (file_exists($filename)) {
-            //     echo "ファイルが存在します。\n";
-            // } else {
-            //     echo "ファイルが存在しません。\n";
-            // }
-            // debug_end
-
-
-            // まだインクルードされていない場合、ファイルをインクルードします
+            // まだインクルードされていない場合、ファイルをインクルードする
             include_once($filename);
 
             $migrationClass = $this->getClassnameFromMigrationFilename($filename);
@@ -106,11 +84,7 @@ class Migrate extends AbstractCommand
 
     private function getClassnameFromMigrationFilename(string $filename): string
     {
-        // マイグレーションのクラス名を正規表現で取得します
-        // /: これは正規表現パターンの開始と終了のデリミタです。
-        // ([^_]+): "_"以外のすべての文字を一致させます。()はグループをキャプチャするためのもので、[^abc]はabc以外を意味します。キャプチャグループは個別に一致させるために使用されます。
-        // \.php: "."が"\"でエスケープされているので、これは終端が'.php'に一致しなければならないことを意味します。
-        // 正規表現の練習やチートシートについては、https://regexr.com/ を参照してください。
+        // マイグレーションのクラス名を正規表現で取得する
         if (preg_match('/([^_]+)\.php$/', $filename, $matches)) return sprintf("%s\%s", 'Database\Migrations', $matches[1]);
         else throw new \Exception("Unexpected migration filename format: " . $filename);
     }
@@ -136,22 +110,9 @@ class Migrate extends AbstractCommand
         $directory = sprintf("%s/../../Database/Migrations", __DIR__);
         $this->log($directory);
 
-        // debug_start
-        // print("directory : ".$directory."\n");
-        // if (file_exists($directory)) {
-        //     echo "ディレクトリが存在します。\n";
-        // } else {
-        //     echo "ディレクトリが存在しません。\n";
-        // }
-        // debug_end
-
-        // globはワイルドカード文字列を引数として渡すと、一致する"globbing pathnames"をすべて返すLinuxのシステムコールです。
-        // これはワイルドカードに一致するすべてのファイルを意味します。詳細は https://man7.org/linux/man-pages/man7/glob.7.html を参照してください。
+        // globはワイルドカード文字列を引数として渡すと、一致する"globbing pathnames"をすべて返すLinuxのシステムコール
+        // これはワイルドカードに一致するすべてのファイルを意味する
         $allFiles = glob($directory . "/*.php");
-        
-        // debug_start
-        // print("allFiles : ".count($allFiles)."\n");
-        // debug_end
 
         usort($allFiles, function ($a, $b) use ($order) {
             $compareResult = strcmp($a, $b);
@@ -165,14 +126,7 @@ class Migrate extends AbstractCommand
     {
         $mysqli = new MySQLWrapper();
         
-        // debug_start
-        // print("count_queries : ".count($queries)."\n");
-        // debug_end
-
         foreach ($queries as $query) {
-            // debug_start
-            // print("query : ".$query."\n");
-            // debug_end
             $result = $mysqli->query($query);
             if ($result === false) throw new \Exception(sprintf("Query {%s} failed.", $query));
             else $this->log('Ran query: ' . $query);
@@ -182,22 +136,21 @@ class Migrate extends AbstractCommand
     private function insertMigration(string $filename): void
     {
         $mysqli = new MySQLWrapper();
-        // Prepareは、SQLインジェクションのようなものを防ぐために文字列を準備するために使用されます。この内容については、コースの後半部分で詳しく取り上げられます。
-        // statementはprepareが返すものです。ここから、オリジナルのクエリ文字列に実際の値を挿入して、クエリを実行することもできます。
+        // オリジナルのクエリ文字列に実際の値を挿入して、クエリを実行することができる
         $statement = $mysqli->prepare("INSERT INTO migrations (filename) VALUES (?)");
         if (!$statement) {
             throw new \Exception("Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error);
         }
 
-        // クエリが準備されたので、準備されたクエリに文字列値を挿入します。
+        // クエリが準備されたので、準備されたクエリに文字列値を挿入する
         $statement->bind_param("s", $filename);
 
-        // ステートメントを実行します
+        // ステートメントを実行する
         if (!$statement->execute()) {
             throw new \Exception("Execute failed: (" . $statement->errno . ") " . $statement->error);
         }
 
-        // ステートメントを閉じます
+        // ステートメントを閉じる
         $statement->close();
     }
 
@@ -207,17 +160,17 @@ class Migrate extends AbstractCommand
         $lastMigration = $this->getLastMigration();
         $allMigrations = $this->getAllMigrationFiles();
 
-        // ソートされたリストで最後のマイグレーションのインデックスを探します
+        // ソートされたリストで最後のマイグレーションのインデックスを探す
         $lastMigrationIndex = array_search($lastMigration, $allMigrations);
 
-        // 最後のマイグレーションが見つかったことを確認します
+        // 最後のマイグレーションが見つかったことを確認する
         if ($lastMigrationIndex === false) {
             $this->log("Could not find the last migration ran: " . $lastMigration);
             return;
         }
 
         $count = 0;
-        // 毎回、マイグレーションのダウン関数を実行します。
+        // 毎回、マイグレーションのダウン関数を実行する
         for ($i = $lastMigrationIndex; $count < $n && $i >= 0; $i--) {
             $filename = $allMigrations[$i];
 

@@ -19,10 +19,6 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         array (
             'Temp\\' => 5,
         ),
-        'S' => 
-        array (
-            'Snippets\\' => 9,
-        ),
         'H' => 
         array (
             'Helpers\\' => 8,
@@ -54,10 +50,6 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'Temp\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Temp',
-        ),
-        'Snippets\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Snippets',
         ),
         'Helpers\\' => 
         array (

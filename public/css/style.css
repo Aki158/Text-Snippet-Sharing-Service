@@ -3,7 +3,7 @@ p {
 }
 
 body {
-    padding-top: 100px; /* ヘッダーの高さに応じて調整 */
+    padding-top: 100px;
 }
 
 .editor-box {
