@@ -29,7 +29,7 @@ require(["vs/editor/editor.main"], function() {
             })
             .then(response => response.text())
             .then(data => {
-                console.log(data);
+                // PHPからの戻り値を確認可能だが、今回は設定しない
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -56,7 +56,7 @@ window.addEventListener("load", (event) => {
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
+        // PHPからの戻り値を確認可能だが、今回は設定しない
     })
     .catch(error => {
         console.error("Error:", error);
