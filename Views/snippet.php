@@ -56,7 +56,7 @@ include 'layout/header.php';
             <p><i class="fa-solid fa-bell"></i> Expiration : <?= htmlspecialchars($snippet["expiration"])?></p>
         </div>
         <div class="d-flex justify-content-end flex-column align-items-end">
-            <button id="copy_button" class=""><i class="fa-regular fa-clipboard fa-xl"></i> copy</button>
+            <button id="copy_button" class=""><i class="fa-regular fa-clipboard fa-xl"></i> Copy code</button>
             <i class="bi bi-clipboard"></i>
             <p id="copy_message" class=" text-danger">　</p>
         </div>
