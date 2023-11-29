@@ -38,5 +38,5 @@ include 'layout/header.php';
     </div>
 </div>
 
-<script src="../public/js/app_publicSnippets.js"></script>
+<script src="../Public/js/app_publicSnippets.js"></script>
 <?php include 'layout/footer.php'; ?>

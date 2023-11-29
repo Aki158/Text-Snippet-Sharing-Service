@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/b5fd11547c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../Public/css/style.css">
 
     <title>Text Snippet Sharing Service</title>
     <div class="fixed-header bg-info">

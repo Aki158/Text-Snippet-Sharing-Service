@@ -67,5 +67,5 @@ include 'layout/header.php';
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
-<script src="../public/js/app_snippet.js"></script>
+<script src="../Public/js/app_snippet.js"></script>
 <?php include 'layout/footer.php'; ?>

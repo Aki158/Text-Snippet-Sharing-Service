@@ -55,5 +55,5 @@ include 'layout/header.php';
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
-<script src="../public/js/app_newSnippet.js"></script>
+<script src="../Public/js/app_newSnippet.js"></script>
 <?php include 'layout/footer.php'; ?>

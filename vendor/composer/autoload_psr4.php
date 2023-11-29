@@ -6,9 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'public\\' => array($baseDir . '/public'),
     'Views\\' => array($baseDir . '/Views'),
     'Temp\\' => array($baseDir . '/Temp'),
+    'Public\\' => array($baseDir . '/Public'),
     'Helpers\\' => array($baseDir . '/Helpers'),
     'Exceptions\\' => array($baseDir . '/Exceptions'),
     'Design\\' => array($baseDir . '/Design'),

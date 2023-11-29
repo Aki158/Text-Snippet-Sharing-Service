@@ -6,7 +6,7 @@
             "Design\\": "Design/",
             "Exceptions\\": "Exceptions/",
             "Helpers\\": "Helpers/",
-            "public\\": "public/",
+            "Public\\": "Public/",
             "Temp\\": "Temp/",
             "Views\\": "Views/"
         }
