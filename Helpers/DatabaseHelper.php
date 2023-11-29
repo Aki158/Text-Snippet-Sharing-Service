@@ -26,7 +26,10 @@ class DatabaseHelper
         $now = date("Y-m-d H:i:s");
         $expirationValue = PHP_INT_MAX;
 
-        if($expiration === "10min"){
+        if($expiration === "Never"){
+            return false;
+        }
+        else if($expiration === "10min"){
             $expirationValue = 10;
         }
         else if($expiration === "1h"){
@@ -77,7 +80,7 @@ class DatabaseHelper
 
         if (!$snippetsTable){
             $snippetsTable[0] = [
-                "name" => "There are no snippets...<br>Let's create a new snippet!!!",
+                "name" => "There are no snippets.<br>Let's create a new snippet !",
                 "posted" => "None",
                 "syntax" => "None",
                 "path" => "None"

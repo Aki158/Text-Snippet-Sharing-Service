@@ -14,6 +14,6 @@ require(["vs/editor/editor.main"], function() {
         editor.trigger('source','editor.action.clipboardCopyAction');
         editor.setPosition({ lineNumber: 1, column: 1 });
         editor.updateOptions({ readOnly: true });
-        document.getElementById("copy_message").innerHTML = "Copy complete!!!"
+        document.getElementById("copy_message").innerHTML = "<i class='fa-solid fa-check'></i> Copied!"
     });
 });
