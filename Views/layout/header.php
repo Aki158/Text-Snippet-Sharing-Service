@@ -9,7 +9,7 @@
 
     <title>Text Snippet Sharing Service</title>
     <div class="fixed-header bg-info">
-        <div class="container d-flex justify-content-between">
+        <div class="container custom-flex">
             <h3 class="py-3">Text Snippet Sharing Service</h3>
             <div>
                 <a href="newSnippet.php" class="btn btn-primary m-3"><i class="fa-solid fa-plus"></i> New Snippet</a>
