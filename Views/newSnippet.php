@@ -15,7 +15,7 @@ include 'layout/header.php';
         <h5 class="py-1"><i class="fa-regular fa-pen-to-square"></i> Optional Snippet Settings</h5>
         <div class="container mb-3">
             <div class="row">
-                <div class="col-4 bg-light rounded custom-border">
+                <div class="col-md-4 bg-light rounded custom-border">
                     <div class="my-3">
                         <p class="my-1">Syntax Highlighting :</p>
                         <select name="syntax">

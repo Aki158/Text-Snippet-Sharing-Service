@@ -36,3 +36,19 @@ body {
     text-align: center;
     z-index: 1000;
 }
+
+.custom-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 767px){
+    body {
+        padding-top: 200px;
+    }
+
+    .custom-flex {
+        display: block;
+        justify-content: normal;
+    }
+}
