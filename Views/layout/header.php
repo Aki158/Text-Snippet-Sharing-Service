@@ -12,10 +12,10 @@
         <div class="container d-flex justify-content-between">
             <h3 class="py-3">Text Snippet Sharing Service</h3>
             <div class="d-sm-none d-md-flex">
-                <a href="newSnippet.php" class="responsive-new-snippet btn btn-primary m-3"><i class="fa-solid fa-plus"></i> New Snippet</a>
-                <a href="newSnippet.php" class="responsive-plus btn btn-primary m-3"><i class="fa-solid fa-plus"></i></a>
-                <a href="publicSnippets.php" class="responsive-public-snippets btn btn-primary m-3"><i class="fa-solid fa-table"></i> Public Snippets</a>
-                <a href="publicSnippets.php" class="responsive-table btn btn-primary m-3"><i class="fa-solid fa-table"></i> </a>
+                <a href="../newSnippet" class="responsive-new-snippet btn btn-primary m-3"><i class="fa-solid fa-plus"></i> New Snippet</a>
+                <a href="../newSnippet" class="responsive-plus btn btn-primary m-3"><i class="fa-solid fa-plus"></i></a>
+                <a href="../publicSnippets" class="responsive-public-snippets btn btn-primary m-3"><i class="fa-solid fa-table"></i> Public Snippets</a>
+                <a href="../publicSnippets" class="responsive-table btn btn-primary m-3"><i class="fa-solid fa-table"></i> </a>
             </div>
         </div>
     </div>

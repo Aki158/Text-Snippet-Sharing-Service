@@ -21,4 +21,32 @@ class ValidationHelper
         return $value;
     }
 
+    public static function code($value): string
+    {
+        $snippetStatus = '';
+
+        if(strlen($value) >= 65535){
+            $snippetStatus = "ExceedsBytes";
+        }
+        else if(strlen($value) == 0){
+            $snippetStatus = "EmptySnippet";
+        }
+        else if(!(mb_check_encoding($value, 'UTF-8'))){
+            $snippetStatus = "non-UTF-8";
+        }
+
+        if($snippetStatus !== ''){
+            header("Location: ../newSnippet?snippetStatus=".$snippetStatus);
+            exit;
+        }
+        return $value;
+    }
+
+    public static function path($path,$prefix): string
+    {
+        if (substr($path, 0, strlen($prefix)) === $prefix) {
+            $path = $prefix;
+        }
+        return $path;
+    }
 }

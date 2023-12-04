@@ -24,7 +24,7 @@ function renderTableCell(index,snippetsTable,tableBody){
     
     row.addEventListener("click", function() {
         if(snippetsTable[index].path !== "None"){
-            window.location.href = "snippet.php"+"?path="+snippetsTable[index].path;
+            window.location.href = "snippet/"+snippetsTable[index].path;
         }
     });
 

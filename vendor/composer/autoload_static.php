@@ -15,6 +15,11 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         array (
             'Temp\\' => 5,
         ),
+        'R' => 
+        array (
+            'Routing\\' => 8,
+            'Response\\' => 9,
+        ),
         'P' => 
         array (
             'Public\\' => 7,
@@ -46,6 +51,14 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'Temp\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Temp',
+        ),
+        'Routing\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Routing',
+        ),
+        'Response\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Response',
         ),
         'Public\\' => 
         array (
