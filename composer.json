@@ -7,6 +7,8 @@
             "Exceptions\\": "Exceptions/",
             "Helpers\\": "Helpers/",
             "Public\\": "Public/",
+            "Response\\": "Response/",
+            "Routing\\": "Routing/",
             "Temp\\": "Temp/",
             "Views\\": "Views/"
         }

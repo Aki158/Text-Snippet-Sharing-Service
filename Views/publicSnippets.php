@@ -2,16 +2,6 @@
 
 namespace Views;
 
-// composerの依存関係のオートロード
-require_once '../vendor/autoload.php';
-
-use Helpers\DatabaseHelper;
-
-DatabaseHelper::checkSnippetsExpiration();
-$snippetsTable = DatabaseHelper::getSnippetsTableInfo();
-
-include 'layout/header.php';
-
 ?>
 
 <script type="text/javascript">
@@ -39,4 +29,3 @@ include 'layout/header.php';
 </div>
 
 <script src="../Public/js/app_publicSnippets.js"></script>
-<?php include 'layout/footer.php'; ?>

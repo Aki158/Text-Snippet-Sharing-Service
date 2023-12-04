@@ -2,16 +2,19 @@
 
 namespace Views;
 
-include 'layout/header.php';
-
 ?>
 
-<div class="container ">
+<script>
+    var snippetStatus = "<?php echo $snippetStatus; ?>";
+</script>
+
+<div class="container">
+    <h4 id="snippetStatus" class="bg-danger text-white "></h4>
     <h4><i class="fa-solid fa-plus"></i> New Snippet</h4>
     <div class="d-flex">
         <div id="editor" class="editor-box col my-2 px-0"></div>
     </div>
-    <form action="createNewSnippet.php" method="post">
+    <form action="../Helpers/createNewSnippet.php" method="post">
         <h5 class="py-1"><i class="fa-regular fa-pen-to-square"></i> Optional Snippet Settings</h5>
         <div class="container mb-3">
             <div class="row">
@@ -56,4 +59,3 @@ include 'layout/header.php';
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
 <script src="../Public/js/app_newSnippet.js"></script>
-<?php include 'layout/footer.php'; ?>

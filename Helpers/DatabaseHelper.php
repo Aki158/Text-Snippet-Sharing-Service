@@ -4,9 +4,31 @@ namespace Helpers;
 
 use Database\MySQLWrapper;
 use DateTime;
+use Exception;
 
 class DatabaseHelper
 {
+    public static function getSnippet(string $path): array{
+        $db = new MySQLWrapper();
+
+        $stmt = $db->prepare("SELECT * FROM snippet WHERE path = ?");
+        $stmt->bind_param('s', $path);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $snippet = $result->fetch_assoc();
+
+        if (!$snippet) throw new Exception('Could not find a path in database');
+
+
+        // スニペットはの有効期限が切れていたら削除し、「Expired Snippet」というメッセージを表示する
+        if(self::isExpired($snippet["expiration"], $snippet["created_at"])){
+            header("Location: ../expiredSnippet");
+            exit;
+        }
+        return $snippet;
+    }
+
     public static function checkSnippetsExpiration(): void{
         $db = new MySQLWrapper();
 

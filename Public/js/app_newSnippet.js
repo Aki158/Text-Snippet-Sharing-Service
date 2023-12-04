@@ -20,7 +20,7 @@ require(["vs/editor/editor.main"], function() {
                     file_type : "txt"
                 }
             
-            fetch("generateToFile.php", {
+            fetch("../Helpers/generateToFile.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -41,13 +41,15 @@ require(["vs/editor/editor.main"], function() {
 });
 
 window.addEventListener("load", (event) => {
+    warningMessage();
+
     const hashmap = {
             data : "",
             file_name : "edit",
             file_type : "txt"
         }
     
-    fetch("generateToFile.php", {
+    fetch("../Helpers/generateToFile.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -77,3 +79,18 @@ document.getElementById('inputName').addEventListener('keydown', function() {
         submitButton.disabled = false;
     }
 });
+
+function warningMessage(){
+    const message = document.getElementById('snippetStatus');
+    const exclamation = "　<i class='fa-solid fa-triangle-exclamation'></i> ";
+
+    if(snippetStatus === "ExceedsBytes"){
+        message.innerHTML = exclamation + "You cannot create a snippet of text larger than 65,535 bytes."
+    }
+    else if(snippetStatus === "EmptySnippet"){
+        message.innerHTML = exclamation +  "You cannot create an empty snippet."
+    }
+    else if(snippetStatus === "non-UTF-8"){
+        message.innerHTML = exclamation +  "You cannot create snippets that contain non-UTF-8 characters."
+    }
+}

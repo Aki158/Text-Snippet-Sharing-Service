@@ -2,45 +2,6 @@
 
 namespace Views;
 
-// composerの依存関係のオートロード
-require_once '../vendor/autoload.php';
-
-use Exception;
-use Database\MySQLWrapper;
-use Helpers\DatabaseHelper;
-
-$path = $_GET['path']??null;
-
-if(!$path) {
-    die("No path specified.");
-}
-
-$db = new MySQLWrapper();
-
-try {
-    $stmt = $db->prepare("SELECT * FROM snippet WHERE path = ?");
-    $stmt->bind_param('s', $path);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $snippet = $result->fetch_assoc();
-} catch (Exception $e) {
-    die("Error fetching snippet by path: " . $e->getMessage());
-}
-
-if (!$snippet) {
-    print("No snippet found with path: $path");
-    exit;
-}
-
-// スニペットはの有効期限が切れていたら削除し、「Expired Snippet」というメッセージを表示する
-if(DatabaseHelper::isExpired($snippet["expiration"], $snippet["created_at"])){
-    print("Expired Snippet");
-    exit;
-}
-
-include 'layout/header.php';
-
 ?>
 
 <script type="text/javascript">
@@ -58,7 +19,7 @@ include 'layout/header.php';
         <div class="d-flex justify-content-end flex-column align-items-end">
             <button id="copy_button" class=""><i class="fa-regular fa-clipboard fa-xl"></i> Copy code</button>
             <i class="bi bi-clipboard"></i>
-            <p id="copy_message" class=" text-danger">　</p>
+            <p id="copy_message" class="text-danger">　</p>
         </div>
     </div>
     <div class="d-flex">
@@ -68,4 +29,3 @@ include 'layout/header.php';
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
 <script src="../Public/js/app_snippet.js"></script>
-<?php include 'layout/footer.php'; ?>
