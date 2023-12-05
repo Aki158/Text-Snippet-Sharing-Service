@@ -47,7 +47,7 @@ namespace Views;
                     <div class="my-3">
                         <p class="my-1">Snippet Name / Title :</p>
                         <p id="errorMessage" class="my-1"><i class="fa-solid fa-triangle-exclamation"></i> Unsupported characters < > : " . / \ | ?*</p>
-                        <input id="inputName" type="text" name="name" size="20" maxlength="30">
+                        <input id="inputName" type="text" name="name" size="20" maxlength="50">
                     </div>
                     <div class="my-4">
                         <input id="submitButton" type="submit" value="Create New Snippet">

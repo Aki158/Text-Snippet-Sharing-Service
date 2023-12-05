@@ -57,5 +57,8 @@ return [
         $snippet = DatabaseHelper::getSnippet($path);
 
         return new JSONRenderer(['snippet'=>$snippet]);
-    }
+    },
+    'api/expiredSnippet'=>function(): HTTPRenderer{
+        return new JSONRenderer(['expiredSnippet'=>'Expired Snippet']);
+    },
 ];
