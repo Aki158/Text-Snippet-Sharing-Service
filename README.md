@@ -102,6 +102,8 @@ https://text-snippet-sharing-service.aki158-website.blog
 
 ## 👀機能一覧
 ### ヘッダー
+![image](https://github.com/Aki158/Text-Snippet-Sharing-Service/assets/119317071/04a2f93f-e4c0-4530-8022-c72a355a138a)
+
 <table>
 <tr>
   <th colspan=2>機能</th>
