@@ -101,7 +101,7 @@ https://text-snippet-sharing-service.aki158-website.blog
 ![ER](https://github.com/Aki158/Text-Snippet-Sharing-Service/assets/119317071/f9d34ea7-cdba-4bbf-bfc3-52a9125c5b8d)
 
 ## 👀機能一覧
-- ヘッダー
+### ヘッダー
 <table>
 <tr>
   <th colspan=2>機能</th>
@@ -117,7 +117,7 @@ https://text-snippet-sharing-service.aki158-website.blog
 </tr>
 </table>
 
-- スニペット作成ページ
+### スニペット作成ページ
 ![image](https://github.com/Aki158/Text-Snippet-Sharing-Service/assets/119317071/96014ea6-0ada-4229-80e9-1d7adb15ed4d)
 
 <table>
@@ -152,7 +152,7 @@ https://text-snippet-sharing-service.aki158-website.blog
 </tr>
 </table>
 
-- スニペットの一覧ページ
+### スニペットの一覧ページ
 
 ![image](https://github.com/Aki158/Text-Snippet-Sharing-Service/assets/119317071/89e10dbc-f2e0-479c-afd1-a500e1bfb230)
 
@@ -175,7 +175,7 @@ https://text-snippet-sharing-service.aki158-website.blog
 </tr>
 </table>
 
-- スニペットの閲覧ページ
+### スニペットの閲覧ページ
 
 ![image](https://github.com/Aki158/Text-Snippet-Sharing-Service/assets/119317071/d849a8d8-8900-4495-b51f-36b064b18ea9)
 
@@ -183,6 +183,10 @@ https://text-snippet-sharing-service.aki158-website.blog
 <tr>
   <th>機能</th>
   <th>内容</th>
+</tr>
+<tr>
+  <td>スニペットのURL生成</td>
+  <td>スニペット作成ページのCreate New Snippet ボタンをクリックすると、スニペット用の一意のURLが生成されます。</td>
 </tr>
 <tr>
   <td>スニペットの閲覧</td>
@@ -198,15 +202,70 @@ https://text-snippet-sharing-service.aki158-website.blog
 </tr>
 </table>
 
+### スニペットの有効期限切れページ
+![image](https://github.com/Aki158/Text-Snippet-Sharing-Service/assets/119317071/6d85c914-f294-45f5-a738-ba4e47b0e31b)
+
+<table>
+<tr>
+  <th>機能</th>
+  <th>内容</th>
+</tr>
+<tr>
+  <td>有効期限切れページの表示</td>
+  <td>スニペット有効期限が切れた場合は、このページに遷移します。</td>
+</tr>
+</table>
+
+## 📜作成の経緯
+【作成中！】
+下記項目の理解を深めるために作成しました。
+- バックエンド言語を用いたデータベースの操作
+
 ## ⭐️こだわった点
+【作成中！】
 テキストや参考にした記事などを再度読み返して技術の理解を深めてから書く。
 
 ここがエンジニアに一番読んでもらいたい箇所なのでできるだけ詳細に書く。
 
+- MVCモデル
+   - サーバサイドレンダリングとクライアントサイドレンダリングをサポートし、下記性質を確保するために、HTTPRendererインターフェースを導入しました。<br>・再利用<br>・関心の分離<br>・拡張性<br>
+   HTTPRendererインターフェースの実装クラスであるHTMLRendererはMVCのアプローチを採用しています。
+   モデル、ビュー、コントローラが分離され、コントローラが Renderer クラスのインスタンスを作成して返す役割を果たします。コントローラは、OOP クラスやデータベーススキーマにマッピングされたデータなどのモデルを使ってデータを準備し、このデータをビューに渡してコンテンツを作成します。
+   モデル : HTMLRendererクラスやデータベーススキーマにマッピングされたデータ
+   ビュー : Viewsフォルダ直下の各ファイルにアクセスしコンテンツを生成する
+   コントローラー : コールバックを呼び出してrendererを作成します。モデルとビューをコントロールする役割になります。
+
+- スニペットのアップロード
+   - ユーザーが内容を送信すると、スニペット用の一意のURL(※1)が生成されるように実装しました。     
+   unique-stringの部分にはhash関数を活用しました。
+   また、URLのパースには、parse_url関数を活用しています。
+   ※1. フォーマット : 「https://{domain}/{path}/{unique-string}」
+   
+- データストレージ
+   - バックエンドへ送信される全てのユーザーからの入力は、厳格に検証とサニタイズが行われる必要があります。
+   - SQL インジェクションを防ぐために、スニペットは安全に保存します。
+
+- エラーハンドリング
+大量のテキストやコード、またはサポートされていない文字が送信された場合でも、適切に処理し、エラーメッセージを表示します。
+
+- データベース
+提出されたスニペット、それらの URL、ハイライト用のプログラム言語、送信時刻、有効期限を記録するために MySQL を使用します。
+
+- ミドルウェア
+   - 必要なすべてのデータベーススキーマをセットアップするためのマイグレーション管理システムを使用します。
+   - データベースとのインタラクションには MySQLWrapper クラスを採用します。
+
 ## 📮今後の実装したいもの
-- ログイン機能
-- シンタックスハイライトの選択肢を増やす
-- レスポンシブデザイン
+- [ ] ログイン機能
+- [ ] ログインしたユーザーが作成したスニペットを一覧で見れる機能
+- [ ] シンタックスハイライトの選択肢を増やす
+- [ ] 有効期限の選択肢を増やす
+- [ ] レスポンシブデザイン
 
-
+## 📑参考文献
+### 公式ドキュメント
+- [Pastebin](https://pastebin.com/)
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- [Bootstrap](https://getbootstrap.jp/)
+- [PHPマニュアル](https://www.php.net/manual/ja/index.php#index)
 
