@@ -26,7 +26,7 @@ https://text-snippet-sharing-service.aki158-website.blog
 4. Create New Snippet ボタンをクリックする
 
 ## 🙋使用例
-イメージは[デモ](#デモ)を参考にしてください。
+スニペットを作成する際のイメージは[デモ](#デモ)を参考にしてください。
 1. [URL](#URL)にアクセスする
 2. エディターに「def main(): print("Hello world")」と記述する
 3. Optional Snippet Settings から下記のように設定する
