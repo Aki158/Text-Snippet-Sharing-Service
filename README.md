@@ -212,7 +212,7 @@ https://text-snippet-sharing-service.aki158-website.blog
 | スクリプトの生成 | CLIで下記コマンドを実行すると、スクリプトを生成することができます。<br>`php console code-gen migration --name {FILENAME}`<br>スクリプトはマイグレーションインターフェースに準拠しており、up関数とdown関数で構成されています。<br>下記フォーマットのスクリプトが `Database\Migrations` の配下に生成されます。<br> `{YYYY-MM-DD}_{UNIX_TIMESTAMP}_{FILENAME}.php`|
 | 実行 | スクリプトを実行する際は、スキーママイグレーションを行うためのマイグレーションコマンドが用意されていてアップグレード(up)またはロールバック(down)を行うことができます。<br>また、CLIで下記コマンドを実行すると、テーブルが初期化されます。<br>`php console migrate --init` |
 
-### データの投入(シーディング)
+### データの投入
 
 | 項目 | 内容 |
 | ------- | ------- |
