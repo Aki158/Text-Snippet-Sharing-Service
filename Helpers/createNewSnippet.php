@@ -19,7 +19,5 @@ $path = ValidationHelper::string(hash("md5",$date));
 $command = sprintf("php ../console seed --name %s --syntax %s --expiration %s --path %s --code %s", $name, $syntax, $expiration, $path, $code);
 exec($command, $output);
 
-header("Location: ../snippet/".$path);
+header("Location: /snippet/".$path);
 exit;
-
-?>

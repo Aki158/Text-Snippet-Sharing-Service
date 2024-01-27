@@ -19,7 +19,7 @@ namespace Views;
         <div class="d-flex justify-content-end flex-column align-items-end">
             <button id="copy_button" class=""><i class="fa-regular fa-clipboard fa-xl"></i> Copy code</button>
             <i class="bi bi-clipboard"></i>
-            <p id="copy_message" class="text-danger">　</p>
+            <p id="copy_message" class="text-danger">&nbsp;</p>
         </div>
     </div>
     <div class="d-flex">
@@ -28,4 +28,4 @@ namespace Views;
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
-<script src="../Public/js/app_snippet.js"></script>
+<script src="/Public/js/app_snippet.js"></script>

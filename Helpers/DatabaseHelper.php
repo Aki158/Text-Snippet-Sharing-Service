@@ -23,7 +23,7 @@ class DatabaseHelper
 
         // スニペットはの有効期限が切れていたら削除し、「Expired Snippet」というメッセージを表示する
         if(self::isExpired($snippet["expiration"], $snippet["created_at"])){
-            header("Location: ../expiredSnippet");
+            header("Location: /expiredSnippet");
             exit;
         }
         return $snippet;

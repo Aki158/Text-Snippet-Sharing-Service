@@ -14,7 +14,7 @@ namespace Views;
     <div class="d-flex">
         <div id="editor" class="editor-box col my-2 px-0"></div>
     </div>
-    <form action="../Helpers/createNewSnippet.php" method="post">
+    <form action="/Helpers/createNewSnippet.php" method="post">
         <h5 class="py-1"><i class="fa-regular fa-pen-to-square"></i> Optional Snippet Settings</h5>
         <div class="container mb-3">
             <div class="row">
@@ -57,5 +57,6 @@ namespace Views;
         </div>
     </form>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
-<script src="../Public/js/app_newSnippet.js"></script>
+<script src="/Public/js/app_newSnippet.js"></script>

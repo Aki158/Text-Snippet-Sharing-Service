@@ -36,7 +36,7 @@ class ValidationHelper
         }
 
         if($snippetStatus !== ''){
-            header("Location: ../newSnippet?snippetStatus=".$snippetStatus);
+            header("Location: /newSnippet?snippetStatus=".$snippetStatus);
             exit;
         }
         return $value;

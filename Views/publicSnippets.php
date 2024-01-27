@@ -8,7 +8,7 @@ namespace Views;
     var snippetsTable = <?php echo json_encode($snippetsTable); ?>;
 </script>
 
-<div class="container">
+<div class="container my-2">
     <h4><i class="fa-solid fa-table"></i> Snippets Archive</h4>
     <p>&#x2757; This page contains the most recently created 'public' Snippets.</p>
     <table class="table table-hover rem0p9">
@@ -28,4 +28,4 @@ namespace Views;
     </div>
 </div>
 
-<script src="../Public/js/app_publicSnippets.js"></script>
+<script src="/Public/js/app_publicSnippets.js"></script>

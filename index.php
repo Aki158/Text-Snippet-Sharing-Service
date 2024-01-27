@@ -15,6 +15,11 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = ltrim($path, '/');
 $path = ValidationHelper::path($path,'snippet');
 
+if($path === ""){
+    header("Location: /newSnippet");
+    exit();
+}
+
 // ルーティングにパスが存在するかチェックする
 if (isset($routes[$path])) {
     // コールバックを呼び出してrendererを作成します。

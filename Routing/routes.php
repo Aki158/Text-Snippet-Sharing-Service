@@ -7,11 +7,6 @@ use Response\Render\HTMLRenderer;
 use Response\Render\JSONRenderer;
 
 return [
-    ''=>function(): HTTPRenderer{
-        $snippetStatus = ValidationHelper::string($_GET['snippetStatus']??'');
-
-        return new HTMLRenderer('newSnippet', ['snippetStatus'=>$snippetStatus]);
-    },
     'newSnippet'=>function(): HTTPRenderer{
         $snippetStatus = ValidationHelper::string($_GET['snippetStatus']??'');
 
